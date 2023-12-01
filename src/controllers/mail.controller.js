@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import nodemailer from 'nodemailer';
 import { __dirname } from '../path.js';
+import { logger } from '../utils/logger.js';
 
 // Config mailing
 
@@ -17,8 +18,8 @@ let transporter = nodemailer.createTransport({
 
 const sendEmail = async (req, res) => {
 	const resultado = await transporter.sendMail({
-		from: 'TEST Coder vanthersc@gmail.com',
-		to: 'vanthersc@gmail.com',
+		from: 'TEST Coder lucasfrazzettatests@gmail.com',
+		to: 'lucasfrazzetta@gmail.com',
 		subject: 'Buenas tardes',
 		html: `
       <div>
@@ -27,8 +28,8 @@ const sendEmail = async (req, res) => {
     `,
 		attachments: [
 			{
-				filename: 'prog.png',
-				path: __dirname + '/images/prog.png',
+				filename: 'Zabuza.png',
+				path: __dirname + '/images/47666.png',
 				cid: 'Zabuza.png',
 			},
 		],
@@ -38,7 +39,7 @@ const sendEmail = async (req, res) => {
 
 const sendPasswordRecoveryEmail = (email, recoveryLink) => {
 	const mailOptions = {
-		from: 'TEST Coder vanthersc@gmail.com',
+		from: 'TEST Coder lucasfrazzettatests@gmail.com',
 		to: email,
 		subject: 'Restore password link',
 		html: `
