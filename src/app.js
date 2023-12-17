@@ -26,13 +26,6 @@ const app = express();
 
 const PORT = 8080;
 
-/* no va a ser necesario porque ya se conecta antes cuando se crea la sesión*/
-
-await mongoose
-	.connect(process.env.MONGO_URL)
-	.then(() => console.log('DB conectada'))
-	.catch(error => console.log(`Error en conexión a MongoDB Atlas:  ${error}`));
-
 // ** significa cualquier subcarpeta
 // * significa cualquier nombre de archivo
 
@@ -94,6 +87,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // conexión con base de datos
+
+/* no va a ser necesario porque ya se conecta antes cuando se crea la sesión*/
+
+mongoose
+	.connect(process.env.MONGO_URL)
+	.then(() => console.log('DB conectada'))
+	.catch(error => console.log(`Error en conexión a MongoDB Atlas:  ${error}`));
 
 // Conexión con socket.io
 
