@@ -10,7 +10,7 @@ let transporter = nodemailer.createTransport({
 	port: 465, // puerto de gmail
 	secure: true,
 	auth: {
-		user: 'lucasfrazzettatests@gmail.com',
+		user: 'vanthersc@gmail.com',
 		pass: process.env.PASSWORD_EMAIL,
 		authMethod: 'LOGIN',
 	},
@@ -18,9 +18,9 @@ let transporter = nodemailer.createTransport({
 
 const sendEmail = async (req, res) => {
 	const resultado = await transporter.sendMail({
-		from: 'TEST Coder lucasfrazzettatests@gmail.com',
-		to: 'lucasfrazzetta@gmail.com',
-		subject: 'Buenas tardes',
+		from: 'TEST Coder vanthersc@gmail.com',
+		to: 'vanthersc@gmail.com',
+		subject: 'Buenas Buenas',
 		html: `
       <div>
         <h1>Hola Buenas Tardes</h1>
@@ -39,7 +39,7 @@ const sendEmail = async (req, res) => {
 
 const sendPasswordRecoveryEmail = (email, recoveryLink) => {
 	const mailOptions = {
-		from: 'TEST Coder lucasfrazzettatests@gmail.com',
+		from: 'TEST Coder vanthersc@gmail.com',
 		to: email,
 		subject: 'Restore password link',
 		html: `

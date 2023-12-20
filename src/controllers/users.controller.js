@@ -8,7 +8,7 @@ const postUser = async (req, res) => {
 		if (!req.user) {
 			return res.status(400).send({ mensaje: 'Usuario existente' });
 		}
-		res.status(200).send({ mensaje: 'Usuario creado' });
+		return res.status(200).send({ mensaje: 'Usuario creado', user: req.user });
 	} catch (error) {
 		res.status(500).send({ mensaje: `Error al crear el usuario ${error}` });
 	}
@@ -71,6 +71,47 @@ const resetPassword = async (req, res) => {
 	}
 };
 
-const usersController = { getUser, postUser, recoveryPassword, resetPassword };
+const deleteUser = async (req, res) => {
+	const { uid } = req.params;
+
+	try {
+		const user = await userModel.findByIdAndDelete(uid);
+		if (user) {
+			return res.status(200).send({ mensaje: 'Usuario eliminado', user: user });
+		}
+
+		res.status(404).send({ error: 'Usuario no encontrado' });
+	} catch (error) {
+		res.status(500).send({ error: `${uid} Error en eliminar usuario ${error}` });
+	}
+};
+
+const uploadDocuments = async (req, res) => {
+	console.log(req.files);
+	try {
+		const uid = req.params.uid;
+		const newDocuments = req.files.map(file => ({
+			name: file.originalname,
+			reference: file.path,
+		}));
+
+		const user = await userModel.findById(uid);
+		user.documents.push(...newDocuments);
+		await user.save();
+
+		res.status(200).send({ message: 'Documento subido exitosamente' });
+	} catch (error) {
+		res.status(500).send('Error al cargar archivo');
+	}
+};
+
+const usersController = {
+	getUser,
+	postUser,
+	recoveryPassword,
+	resetPassword,
+	deleteUser,
+	uploadDocuments,
+};
 
 export default usersController;
