@@ -60,9 +60,13 @@ const io = new Server(server);
 
 //Middlewares
 function auth(req, res, next) {
-	if (req.session.emial === 'admin@admin.com') {
+	console.log('Verificando autenticación...');
+    console.log('Email de la sesión:', req.session.email);
+	if (req.session.email === 'admin@admin.com') {
+		console.log('Autenticación exitosa');
 		return next();
 	} else {
+		console.log('Autenticación fallida');
 		res.send('No tenés acceso a este contenido');
 	}
 }

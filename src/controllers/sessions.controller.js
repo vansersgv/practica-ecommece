@@ -12,11 +12,19 @@ const postSession = async (req, res) => {
 			// se envia el token a las cookies
 			maxAge: 43200000, // seteamos que dure 12 hs en milisegundos
 		});
-		const user = userModel.findOne({ email: req.user.email });
+		const user = await userModel.findOne({ email: req.user.email });
 		user.last_connection = Date.now();
 		await user.save();
 
-		return res.status(200).send('Login exitoso');
+		// Almacena el mensaje en una cookie
+        res.cookie('message', 'Login exitoso', {
+            maxAge: 7000, // La cookie expira después de 5 segundos
+        });
+
+		//return res.status(200).send('Login exitoso');
+		// Redirige al usuario a la página de productos
+        return res.redirect('/static/products');
+		//return res.status(200).json({ message: 'Login exitoso', redirectUrl: '/static/products' });
 	} catch (error) {
 		res.status(500).send({ mensaje: `Error al iniciar sesión ${error}` });
 	}
@@ -39,7 +47,7 @@ const getLogout = async (req, res) => {
 	if (req.session) {
 		req.session.destroy();
 		if (req.user) {
-			const user = userModel.findOne({ email: req.user.email });
+			const user = await userModel.findOne({ email: req.user.email });
 			user.last_connection = Date.now();
 			await user.save();
 		}

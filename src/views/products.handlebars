@@ -1,11 +1,108 @@
-<h1>Products</h1>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    h1 {
+        color: #333;
+		text-align: center;
+    }
+
+    #bienvenida {
+        color: #0066cc;
+		text-align: center;
+    }
+
+    p {
+        color: #666;
+    }
+
+.user-info {
+        background-color: #f8f8f8;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .user-info p {
+        margin-bottom: 0;
+    }
+    #logout-button {
+        background-color: #ff0000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+		display: inline-block;
+        margin-top: 20px;
+        cursor: pointer;
+		text-align: center;
+    }
+
+    #products-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    #prev-page-button, #next-page-button {
+        background-color: #0066cc;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+	.product-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 10px;
+        width: 200px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    	display: flex;
+        flex-direction: column;
+        align-items: center;
+	}
+
+    .product-card h3 {
+        margin-top: 0;
+    }
+
+    .product-card p {
+        margin-bottom: 0;
+    }
+
+	.add-to-cart-button {
+        margin-top: 10px;
+    }
+
+	
+</style>
+
+<div class="user-info">
+
 <h2 id='bienvenida'>Bienvenido {{user.first_name}} {{user.last_name}}</h2>
 <p>Edad: {{user.age}}</p>
 <p>Email: {{user.email}}</p>
 <p>Rol: {{user.rol}}</p>
 <button id='logout-button'>Logout</button>
+</div>
 
-<section id='products-container'></section>
+<h1>Products</h1>
+
+<section id='products-container'>
+    {{#each products}}
+    <div class="product-card">
+        <h3>{{this.name}}</h3>
+        <p>{{this.description}}</p>
+        <p>Price: ${{this.price}}</p>
+    </div>
+    {{/each}}
+</section>
 <section class='pagination'>
 	<button id='prev-page-button'>Prev</button>
 	<span id='page-number'></span>

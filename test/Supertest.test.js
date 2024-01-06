@@ -19,11 +19,11 @@ describe('Testing Aplicación', () => {
 			this.timeout(5000);
 
 			const newUser = {
-				first_name: 'Cacho',
-				last_name: 'Castaña',
-				email: 'cacho@castaña.com',
-				age: 45,
-				password: 'siteagarro',
+				first_name: 'Juan',
+				last_name: 'Perez',
+				email: 'juan.perez@example.com',
+				age: 30,
+				password: 'password123',
 			};
 
 			const { _body } = await requester.post('/api/users').send(newUser);
@@ -43,8 +43,8 @@ describe('Testing Aplicación', () => {
 			before(async function () {
 				this.timeout(7000);
 				const response = await requester.post('/api/sessions/login').send({
-					email: 'lucas@pepe.com',
-					password: 'peperino',
+					email: 'sergio@vergara.com',
+					password: 'checo123',
 				});
 				cookie = response.headers['set-cookie'][0];
 				token = cookie.split(';')[0].split('=')[1];
@@ -86,11 +86,11 @@ describe('Testing Aplicación', () => {
 				this.timeout(7000);
 
 				const newUser = {
-					first_name: 'Cacho',
-					last_name: 'Castaña',
-					email: 'cacho@castaña.com',
-					age: 45,
-					password: 'siteagarro',
+					first_name: 'Juan',
+					last_name: 'Perez',
+					email: 'juan.perez@example.com',
+					age: 30,
+					password: 'password123',
 				};
 
 				const { _body } = await requester.post('/api/users').send(newUser);
@@ -136,8 +136,5 @@ describe('Testing Aplicación', () => {
 			});
 		});
 	});
-
-	// email: 'loco@lope.com',
-	// 			age: 45,
-	// 			password: 'elpepe',
+	
 });
